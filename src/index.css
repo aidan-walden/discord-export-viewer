@@ -1,0 +1,7 @@
+@import "../styles/globals.css";
+
+@layer base {
+  body {
+    @apply m-0 bg-chat text-default font-sans;
+  }
+}

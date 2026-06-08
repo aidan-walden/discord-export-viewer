@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+/* Discord dark palette — encoded as semantic Tailwind v4 theme tokens. Only the
+   subset the message row needs is modeled here. Dark-only: tokens live directly
+   on the theme with no `.dark` toggle. Components reference these semantic names
+   (bg-chat, text-default, text-muted, text-header, text-link, bg-blurple),
+   never raw hex. */
+@theme {
+  --color-chat: #313338; /* chat background */
+  --color-default: #dbdee1; /* primary message text */
+  --color-muted: #949ba4; /* timestamps, (edited) marker */
+  --color-header: #f2f3f5; /* default username / header gray */
+  --color-link: #00a8fc; /* link blue */
+  --color-blurple: #5865f2; /* Discord blurple (default avatar) */
+}

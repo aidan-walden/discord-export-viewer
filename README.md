@@ -17,7 +17,7 @@ Supports:
 
 This project intends to:
 
-- Provide a platform-ambigous solution to viewing Discord Chat Exporter exports
+- Provide a platform-agnostic solution to viewing Discord Chat Exporter exports
 - Require no additional downloads from the user to use
 
 Although this project is very similar to [DiscordChatExporter-frontend](DiscordChatExporter-frontend), it aims to differeniate itself in these two ways.

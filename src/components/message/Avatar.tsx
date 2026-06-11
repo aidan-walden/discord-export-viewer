@@ -1,8 +1,9 @@
-// Self-contained default-avatar placeholder: a blurple circle with Discord's
-// mascot glyph, rendered entirely from inline SVG so the slice stays fully
-// offline. The `avatarUrl` prop is part of the contract but unresolved this
-// slice — there is no asset transport yet, so we always fall back to the
-// default avatar (a real product behavior, not only a mock device).
+// Resolves `avatarUrl` to an object URL via the store's resolveAsset (ADP 0003),
+// falling back to the self-contained blurple default-mascot glyph while loading
+// or whenever resolution fails (e.g. the asset is missing from the export). The
+// default is a real product behavior, not only an offline device.
+
+import { useResolvedAsset } from "@/store/useResolvedAsset";
 
 interface AvatarProps {
   avatarUrl: string;
@@ -16,8 +17,21 @@ const sizes = {
   sm: { wrap: "size-8", glyph: "size-5" },
 } as const;
 
-export function Avatar({ alt, size = "md" }: AvatarProps) {
+export function Avatar({ avatarUrl, alt, size = "md" }: AvatarProps) {
   const { wrap, glyph } = sizes[size];
+  const url = useResolvedAsset(avatarUrl);
+
+  if (url) {
+    return (
+      <img
+        src={url}
+        alt={alt}
+        className={`${wrap} shrink-0 rounded-full object-cover select-none`}
+        draggable={false}
+      />
+    );
+  }
+
   return (
     <div
       className={`${wrap} shrink-0 rounded-full bg-blurple flex items-center justify-center select-none`}

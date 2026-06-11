@@ -1,4 +1,4 @@
-import type { Author, MessageGroup } from "@/types/message";
+import type { Author, Message, MessageGroup } from "@/types/message";
 
 // Captured once at module load so the fixture's relative timestamps and the
 // renderer's relative-day headers agree on a single reference "now". App threads
@@ -13,30 +13,54 @@ function at(dayOffset: number, hour: number, minute: number): string {
   return d.toISOString();
 }
 
+// Fill the export-faithful fields the renderer ignores this slice, so fixtures
+// stay readable while satisfying the widened Message/Author contract.
+type MsgCore = Pick<Message, "id" | "timestamp" | "timestampEdited" | "content" | "author">;
+function msg(core: MsgCore): Message {
+  return {
+    type: "Default",
+    callEndedTimestamp: null,
+    isPinned: false,
+    attachments: [],
+    embeds: [],
+    stickers: [],
+    reactions: [],
+    mentions: [],
+    inlineEmojis: [],
+    ...core,
+  };
+}
+
 const aurora: Author = {
   id: "1001",
   name: "aurora",
+  discriminator: "0001",
   nickname: "Aurora",
   color: "#f47fff", // non-null → username renders in this color
   isBot: false,
+  roles: [],
   avatarUrl: "Aurora_Files/avatar.png", // unresolved this slice → default avatar
 };
 
 const bjorn: Author = {
   id: "1002",
   name: "bjorn",
+  discriminator: "0002",
   nickname: null,
   color: null, // null → default header gray
   isBot: false,
+  roles: [],
   avatarUrl: "Bjorn_Files/avatar.png",
 };
 
 const cassia: Author = {
   id: "1003",
   name: "cassia",
+  discriminator: "0003",
   nickname: "Cassia",
   color: null,
   isBot: false,
+  roles: [],
   avatarUrl: "Cassia_Files/avatar.png",
 };
 
@@ -45,22 +69,20 @@ export const mockGroups: MessageGroup[] = [
   {
     author: cassia,
     messages: [
-      {
+      msg({
         id: "2001",
-        type: "Default",
         timestamp: at(9, 16, 12),
         timestampEdited: null,
         content: "Did we ever settle on a date for the next session?",
         author: cassia,
-      },
-      {
+      }),
+      msg({
         id: "2002",
-        type: "Default",
         timestamp: at(9, 16, 13),
         timestampEdited: null,
         content: "I can do any evening except Thursday.",
         author: cassia,
-      },
+      }),
     ],
   },
   // Yesterday → "Yesterday at …" header. Full row + compact follow-up;
@@ -68,22 +90,20 @@ export const mockGroups: MessageGroup[] = [
   {
     author: bjorn,
     messages: [
-      {
+      msg({
         id: "2003",
-        type: "Default",
         timestamp: at(1, 20, 30),
         timestampEdited: null,
         content: "Pushed the map handouts to the shared folder.",
         author: bjorn,
-      },
-      {
+      }),
+      msg({
         id: "2004",
-        type: "Default",
         timestamp: at(1, 20, 32),
         timestampEdited: at(1, 20, 35),
         content: "Two of them are spoilers — don't peek before the reveal.",
         author: bjorn,
-      },
+      }),
     ],
   },
   // Today → "Today at …" header. Full row + two compact follow-ups; the first
@@ -92,30 +112,27 @@ export const mockGroups: MessageGroup[] = [
   {
     author: aurora,
     messages: [
-      {
+      msg({
         id: "2005",
-        type: "Default",
         timestamp: at(0, 9, 5),
         timestampEdited: at(0, 9, 7),
         content: "Morning! Recap from last week:\n  • the door was a mimic\n  • nobody trusts the bard now",
         author: aurora,
-      },
-      {
+      }),
+      msg({
         id: "2006",
-        type: "Default",
         timestamp: at(0, 9, 6),
         timestampEdited: null,
         content: "Markdown like **bold** and ||spoilers|| render literally for now.",
         author: aurora,
-      },
-      {
+      }),
+      msg({
         id: "2007",
-        type: "Default",
         timestamp: at(0, 9, 8),
         timestampEdited: null,
         content: "See you all tonight 🎲",
         author: aurora,
-      },
+      }),
     ],
   },
 ];

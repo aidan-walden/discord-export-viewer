@@ -13,4 +13,7 @@
   --color-header: #f2f3f5; /* default username / header gray */
   --color-link: #00a8fc; /* link blue */
   --color-blurple: #5865f2; /* Discord blurple (default avatar) */
+  --color-rail: #1e1f22; /* far-left server rail (darkest surface) */
+  --color-channel: #949ba4; /* idle channel / category label */
+  --color-channel-active: #3f4248; /* selected-channel pill background */
 }

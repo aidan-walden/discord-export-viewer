@@ -18,54 +18,66 @@ export const mockRoles: Role[] = [
 const aurora: Author = {
   id: "1001",
   name: "aurora",
+  discriminator: "0001",
   nickname: "Aurora",
   color: "#f47fff",
   isBot: false,
+  roles: [],
   avatarUrl: "Aurora_Files/avatar.png",
 };
 
 const bjorn: Author = {
   id: "1002",
   name: "bjorn",
+  discriminator: "0002",
   nickname: null,
   color: null,
   isBot: false,
+  roles: [],
   avatarUrl: "Bjorn_Files/avatar.png",
 };
 
 const cassia: Author = {
   id: "1003",
   name: "cassia",
+  discriminator: "0003",
   nickname: "Cassia",
   color: null,
   isBot: false,
+  roles: [],
   avatarUrl: "Cassia_Files/avatar.png",
 };
 
 const dimitri: Author = {
   id: "1004",
   name: "dimitri",
+  discriminator: "0004",
   nickname: "Dimitri",
   color: null,
   isBot: false,
+  roles: [],
   avatarUrl: "Dimitri_Files/avatar.png",
 };
 
 const elena: Author = {
   id: "1005",
   name: "elena",
+  discriminator: "0005",
   nickname: "Elena",
   color: null,
   isBot: false,
+  roles: [],
   avatarUrl: "Elena_Files/avatar.png",
 };
 
 const ledger: Author = {
   id: "1006",
   name: "Ledger",
+  discriminator: "0006",
   nickname: "Ledger Bot",
   color: null,
   isBot: true,
+  roles: [],
   avatarUrl: "Ledger_Files/avatar.png",
 };
 

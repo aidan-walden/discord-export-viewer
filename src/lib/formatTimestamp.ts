@@ -19,8 +19,15 @@ const fullFmt = new Intl.DateTimeFormat("en-US", {
   hour12: true,
 });
 
+const dividerFmt = new Intl.DateTimeFormat("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+
 // Calendar-day index in the local timezone, independent of clock time and DST.
-function localDayIndex(d: Date): number {
+// Exported so message grouping and date dividers share one day-boundary rule.
+export function localDayIndex(d: Date): number {
   return Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 86_400_000);
 }
 
@@ -50,4 +57,9 @@ export function formatClockTime(iso: string): string {
 /** Long localized date+time for the native `title` hover tooltip. */
 export function formatFullTimestamp(iso: string): string {
   return fullFmt.format(new Date(iso));
+}
+
+/** Centered day-boundary label for a date divider, e.g. "June 1, 2024". */
+export function formatDividerDate(iso: string): string {
+  return dividerFmt.format(new Date(iso));
 }

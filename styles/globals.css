@@ -7,6 +7,7 @@
    never raw hex. */
 @theme {
   --color-chat: #313338; /* chat background */
+  --color-sidebar: #2b2d31; /* channel / member-list sidebar background */
   --color-default: #dbdee1; /* primary message text */
   --color-muted: #949ba4; /* timestamps, (edited) marker */
   --color-header: #f2f3f5; /* default username / header gray */
